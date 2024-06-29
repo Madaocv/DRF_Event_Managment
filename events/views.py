@@ -103,7 +103,8 @@ class EventRegistrationViewSet(mixins.CreateModelMixin, mixins.DestroyModelMixin
         instance = self.get_object()
         if instance.user != request.user:
             return Response({"detail": "You do not have permission to delete this registration."}, status=status.HTTP_403_FORBIDDEN)
-        return super().destroy(request, *args, **kwargs)
+        self.perform_destroy(instance)
+        return Response({"detail": "Event registration deleted successfully."}, status=status.HTTP_204_NO_CONTENT)
     
     def perform_create(self, serializer):
         user = self.request.user
