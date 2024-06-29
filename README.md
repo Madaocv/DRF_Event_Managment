@@ -24,7 +24,7 @@ Implement an advanced feature like event search or filtering.
 1. **Clone the repository**:
 ```sh
 git clone https://github.com/Madaocv/DRF_Event_Managment.git
-cd eva00
+cd DRF_Event_Managment
 ```
 
 2. **Create and activate a virtual environment**:
