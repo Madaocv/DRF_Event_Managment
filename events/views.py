@@ -100,6 +100,9 @@ class EventRegistrationViewSet(mixins.CreateModelMixin, mixins.DestroyModelMixin
 
     @swagger_auto_schema(operation_summary="Delete an Event Registration")
     def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        if instance.user != request.user:
+            return Response({"detail": "You do not have permission to delete this registration."}, status=status.HTTP_403_FORBIDDEN)
         return super().destroy(request, *args, **kwargs)
     
     def perform_create(self, serializer):
