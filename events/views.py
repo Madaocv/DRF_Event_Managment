@@ -87,7 +87,13 @@ class EventViewSet(viewsets.ModelViewSet):
             raise ValidationError("Event with this title already exists")
         serializer.save(organizer=self.request.user)
 
-
+    @swagger_auto_schema(operation_summary="Delete an Event")
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        if instance.organizer != request.user:
+            return Response({"detail": "You do not have permission to delete this event."}, status=status.HTTP_403_FORBIDDEN)
+        self.perform_destroy(instance)
+        return Response({"detail": "Event deleted successfully."}, status=status.HTTP_204_NO_CONTENT)
 
 class EventRegistrationViewSet(mixins.CreateModelMixin, mixins.DestroyModelMixin, viewsets.GenericViewSet):
     queryset = EventRegistration.objects.all()
