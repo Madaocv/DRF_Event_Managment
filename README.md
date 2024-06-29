@@ -172,8 +172,12 @@ curl -X POST 'http://127.0.0.1:8000/api/eventregistration/' \
     "event": 1
 }'
 ```
-
-### 6. Searching and Filtering Events
+### 6. Unsubscribe for an Event
+```bash
+curl -X DELETE 'http://127.0.0.1:8000/api/eventregistration/1/' \
+--header 'Authorization: Bearer YOUR_ACCESS_TOKEN' \
+```
+### 7. Searching and Filtering Events
 
 #### Searching for Events by Keywords
 ```bash
@@ -198,5 +202,17 @@ curl -X GET 'http://127.0.0.1:8000/api/events/?location=New+York' \
 curl -X GET 'http://127.0.0.1:8000/api/events/?price_from=50&price_to=200' \
 --header 'Authorization: Bearer YOUR_ACCESS_TOKEN'
 ```
+
+## Screenshot Examples
+
+### API documentation from OpenAPI with Redoc
+
+![API documentation](static/img/redoc_example.png)
+*API documentation*
+
+### Home Page Jinja2 Temlate
+
+![Home Page](static/img/jinja2_home_page.png)
+*Home Page*
 
 These examples will help you use the API of your project to create users, obtain JWT tokens, perform CRUD operations with events, register for events, and search and filter events.
