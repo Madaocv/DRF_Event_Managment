@@ -165,7 +165,7 @@ curl -X DELETE 'http://127.0.0.1:8000/api/events/1/' \
 
 ### 5. Registering for an Event
 ```bash
-curl -X POST 'http://127.0.0.1:8000/api/registrations/' \
+curl -X POST 'http://127.0.0.1:8000/api/eventregistration/' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer YOUR_ACCESS_TOKEN' \
 --data-raw '{
