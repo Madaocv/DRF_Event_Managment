@@ -1,0 +1,77 @@
+[
+    {
+      "model": "auth.user",
+      "pk": 1,
+      "fields": {
+        "username": "user1",
+        "password": "pbkdf2_sha256$260000$2uFzYwRFA0h9$D3t1xF/8Lw1Y5c/IMZHXY7sTyIdw4yY/GTLXz1sD0Wk=",
+        "is_superuser": false,
+        "is_staff": false,
+        "is_active": true,
+        "email": "user1@example.com"
+      }
+    },
+    {
+      "model": "auth.user",
+      "pk": 2,
+      "fields": {
+        "username": "user2",
+        "password": "pbkdf2_sha256$260000$3lf09gBtN5l9$T7F4/r7eJ9Nk7F6s4NGvD1QW6LTkJb6pXGf3KXbW2Wk=",
+        "is_superuser": false,
+        "is_staff": false,
+        "is_active": true,
+        "email": "user2@example.com"
+      }
+    },
+    {
+      "model": "events.event",
+      "pk": 1,
+      "fields": {
+        "title": "Sample Event 1",
+        "description": "This is a sample event description.",
+        "date": "2024-07-01",
+        "event_time": "15:00:00",
+        "location": "Sample Location",
+        "status": "published",
+        "slug": "sample-event-1",
+        "organizer": 1,
+        "price": 100,
+        "category": "concert"
+      }
+    },
+    {
+      "model": "events.event",
+      "pk": 2,
+      "fields": {
+        "title": "Sample Event 2",
+        "description": "This is another sample event description.",
+        "date": "2024-07-15",
+        "event_time": "18:00:00",
+        "location": "Another Location",
+        "status": "published",
+        "slug": "sample-event-2",
+        "organizer": 2,
+        "price": 200,
+        "category": "coaching"
+      }
+    },
+    {
+      "model": "events.eventregistration",
+      "pk": 1,
+      "fields": {
+        "event": 1,
+        "user": 2,
+        "registered_at": "2024-07-01T15:00:00Z"
+      }
+    },
+    {
+      "model": "events.eventregistration",
+      "pk": 2,
+      "fields": {
+        "event": 2,
+        "user": 1,
+        "registered_at": "2024-07-15T18:00:00Z"
+      }
+    }
+  ]
+  
