@@ -1,0 +1,32 @@
+{# {% load staticfiles madaotag %} #}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <link href="{% static 'libraries/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/eve-black-blue.css' %}" rel="stylesheet" type="text/css" id="css-primary">
+	<link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon-blue.png' %}">
+    <link rel="stylesheet" href="{% static 'css/classic.css' %}">
+
+    <title>Event Management {% block meta_title %}{% endblock meta_title %}</title>
+</head>
+
+<body class="">
+{% block content %}
+
+{% endblock %}
+
+<script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.ezmark.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/picker.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/picker.date.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/picker.time.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/eve.js' %}"></script>
+
+</body>
+</html>

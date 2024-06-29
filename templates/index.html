@@ -1,0 +1,195 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="page-wrapper">
+    <div class="header-wrapper">
+        <div class="header">        
+            <div class="header-inner">
+                <div class="header-top">
+                    <div class="container-fluid">
+                        <div class="header-logo">
+                            <a href="/">
+                                <span class="eve-logo"><i class="fa fa-star"></i></span> 
+                                <strong>
+                                    <span>Smart Events Theme</span>
+                                </strong>
+                            </a>
+                        </div><!-- /.header-logo -->
+                    </div><!-- /.container-fluid -->
+                </div><!-- /.header-top -->
+            </div><!-- /.header-inner -->
+        </div><!-- /.header -->
+    </div><!-- /.header-wrapper -->
+    
+    <div class="main-wrapper">
+        <div class="main">
+            <div class="main-inner">
+                <div class="content">
+                    <div class="page-header pull-top">
+                        <div class="page-header-inner">
+                            <div class="container-fluid">
+                                <h1>Most Recent Events</h1>
+                            </div><!-- /.container-fluid -->
+                        </div><!-- /.page-header-inner -->
+                    </div><!-- /.page-header -->
+
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-3 col-xl-2">
+                                <div class="filter filter-primary checkbox-light">
+                                    <form method="get" action="?">
+                                        <h2>General Options</h2>
+
+                                        <div class="filter-group">
+                                            <div class="filter-group-inner">
+                                                <div class="form-group">
+                                                    <label>Location</label>
+                                                    <input type="text" class="form-control" name="location" value="{{ location }}">
+                                                </div><!-- /.form-group -->
+
+                                                <div class="form-group">
+                                                    <label>Category</label>
+                                                    <select class="form-control" name="category">
+                                                        <option value="">Select Category</option>
+                                                        <option value="concert" {% if category == "concert" %}selected{% endif %}>Concert</option>
+                                                        <option value="coaching" {% if category == "coaching" %}selected{% endif %}>Coaching</option>
+                                                        <!-- Додайте інші категорії тут -->
+                                                    </select>
+                                                </div><!-- /.form-group -->
+                                            </div><!-- /.filter-group-inner -->
+                                        </div><!-- /.filter-group -->
+
+                                        <h2>Price Options</h2>
+
+                                        <div class="filter-group">
+                                            <div class="filter-group-inner">
+                                                <div class="form-group">
+                                                    <label>Price From</label>
+                                                    <input type="text" class="form-control" name="price_from" value="{{ price_from }}">
+                                                </div><!-- /.form-group -->
+
+                                                <div class="form-group">
+                                                    <label>Price To</label>
+                                                    <input type="text" class="form-control" name="price_to" value="{{ price_to }}">
+                                                </div><!-- /.form-group -->      
+                                            </div><!-- /.filter-group-inner -->
+                                        </div><!-- /.filter-group -->
+
+                                        <h2>Time Filters</h2>
+
+                                        <div class="filter-group">
+                                            <div class="filter-group-inner">
+                                                <div class="radio">
+                                                    <label><input type="radio" name="filter-time" value="today" {% if filter_time == "today" %}checked{% endif %}> Today</label>               
+                                                </div><!-- /.checkbox -->                                
+                                                <div class="radio">
+                                                    <label><input type="radio" name="filter-time" value="this_week" {% if filter_time == "this_week" %}checked{% endif %}> This Week</label>            
+                                                </div><!-- /.checkbox -->
+                                                <div class="radio">
+                                                    <label><input type="radio" name="filter-time" value="this_month" {% if filter_time == "this_month" %}checked{% endif %}> This Month</label>              
+                                                </div><!-- /.checkbox -->
+                                            </div><!-- /.filter-group-inner -->
+                                        </div><!-- /.filter-group -->
+
+                                        <div class="form-group-btn ">
+                                            <button type="submit" class="btn btn-secondary btn-block">Filter Events</button>
+                                        </div><!-- /.form-group -->              
+                                    </form>
+                                </div>
+                            </div><!-- /.col-* -->
+
+                            <div class="col-lg-9 col-xl-10">
+                                <div class="filter-results">
+                                    <strong>{{ events.paginator.count }} events matching your search query</strong>
+
+                                </div>
+
+                                <div class="row">
+                                    {% for event in events %}
+                                        <div class="col-sm-3">
+                                            <div class="card">
+                                                <div class="card-inner">
+                                                    <div class="card-image">
+                                                        <a href="#" style="background-image: url('static/img/default-event.jpeg');">
+                                                            <span><i class="fa fa-search"></i></span>
+                                                        </a>
+                                                    </div><!-- /.card-image -->
+
+                                                    <div class="card-content"> 
+                                                        <div class="card-date">
+                                                            <strong>{{ event.date|date:"d" }}</strong>
+                                                            <span>{{ event.date|date:"M" }}</span>
+                                                        </div><!-- /.card-date -->
+
+                                                        <h3 class="card-title">
+                                                            <a href="/">{{ event.title }}</a>
+                                                        </h3>
+
+                                                        <h4 class="card-subtitle">
+                                                            <a href="#">{{ event.location }}</a>
+                                                        </h4>
+
+                                                        <p>Registered: {{ event.registration_count }}</p>
+                                                        <span>Price: {{event.price}}</span>
+                                                    </div><!-- /.card-content -->
+                                                </div><!-- /.card-inner -->
+                                            </div><!-- /.card -->
+                                        </div><!-- /.col-* -->
+                                    {% endfor %}
+                                </div><!-- /.row -->
+
+                                <div class="center">
+                                    <ul class="pagination">
+                                        {% if page_obj.has_previous %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?{{ query_string }}&page={{ page_obj.previous_page_number }}">
+                                                <i class="fa fa-chevron-left"></i>
+                                            </a>
+                                        </li>
+                                        {% endif %}
+                                
+                                        {% for page_num in paginator.page_range %}
+                                        <li class="page-item {% if page_obj.number == page_num %}active{% endif %}">
+                                            <a class="page-link" href="?{{ query_string }}&page={{ page_num }}">{{ page_num }}</a>
+                                        </li>
+                                        {% endfor %}
+                                
+                                        {% if page_obj.has_next %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?{{ query_string }}&page={{ page_obj.next_page_number }}">
+                                                <i class="fa fa-chevron-right"></i>
+                                            </a>
+                                        </li>
+                                        {% endif %}
+                                    </ul><!-- /.pagination -->
+                                </div><!-- /.center -->
+                                
+                                
+                            </div><!-- /.col-* -->
+                        </div><!-- /.row -->
+                    </div><!-- /.container-fluid -->
+                </div><!-- /.content -->
+            </div><!-- /.main-inner -->
+        </div><!-- /.main -->
+    </div><!-- /.main-wrapper -->
+
+    <div class="footer-wrapper">
+        <div class="footer">
+            <div class="container-fluid">
+                <div class="footer-inner">
+                    <div class="footer-top">
+                        <div class="footer-left">
+                            <p class="white">&copy; Event Management. All rights reserved.</p>
+                        </div><!-- /.footer-left -->
+                    </div><!-- /.footer-top -->
+                </div><!-- /.footer-inner -->
+            </div><!-- /.container-fluid -->
+        </div><!-- /.footer -->
+    </div><!-- /.footer-wrapper -->
+
+    <div class="page-wrapper-overlay"></div><!-- /.page-wrapper-overlay -->
+</div><!-- /.page-wrapper -->
+
+{% endblock %}
